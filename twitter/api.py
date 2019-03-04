@@ -3034,11 +3034,11 @@ class Api(object):
 
     def PostDirectMessage(self,
                           text,
-                          add_download_button=False,
                           user_id=None,
                           media_file_path=None,
                           media_type=None,
                           screen_name=None,
+                          ctas=None,
                           return_json=False):
         """Post a twitter direct message from the authenticated user.
 
@@ -3065,13 +3065,8 @@ class Api(object):
         message_data_value = {
             'text': text
         }
-        if add_download_button:
-            message_data_value['ctas'] = [
-                            {
-                                "type": "web_url",
-                                "label": "Download Humanz",
-                                "url": "https://www.humanz.ai/reference/downloadapp"
-                            }]
+        if ctas is not None:
+            message_data_value['ctas'] = ctas
         if media_file_path is not None:
             try:
                 media = open(media_file_path, 'rb')
