@@ -3034,6 +3034,7 @@ class Api(object):
 
     def PostDirectMessage(self,
                           text,
+                          add_download_button=False,
                           user_id=None,
                           media_file_path=None,
                           media_type=None,
@@ -3064,6 +3065,13 @@ class Api(object):
         message_data_value = {
             'text': text
         }
+        if add_download_button:
+            message_data_value['ctas'] = [
+                            {
+                                "type": "web_url",
+                                "label": "Download Humanz",
+                                "url": "https://www.humanz.ai/reference/downloadapp"
+                            }]
         if media_file_path is not None:
             try:
                 media = open(media_file_path, 'rb')
